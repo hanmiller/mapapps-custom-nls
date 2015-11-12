@@ -11,8 +11,32 @@ Usage Guide
 ------------------
 To add your own nls customizations, at first download the bundle and extract the zip file. In the zip file you will find two bundle.js files in the folder "nls" (for English) and in "nls/de" (for German).
 
-Open this files in a text editor and add the nls strings that you want to customize. A full list of all available nls string can be found here:
+Open this files in a text editor and add the nls strings that you want to customize. Sample:
+```
+define({
+    root:
+    ({
+        "basemaptoggler": {
+            "ui": {
+                "labelTitle": "Background"
+            }
+        },
+        "mapflow": {
+            "tool": {
+                "title": "Topics"
+            }
+        }
+    }),
+    "de": true
+});
+```
+
+A full list of all available nls string can be found here: <TBD>
 
 After saving your changes, zip all contents of the bundle folder and upload the zip file via the map.apps Manager bundle management tab.
 
 Now add the bundle to all of your apps, that should use the customized nls strings.
+
+Adding a completely new language to map.apps
+------------------
+If you want to add a completely new language to your map.apps installation, please have a look at this tool: http://developernetwork.conterra.de/en/downloads/tools/how-generate-additional-language-bundles-mapapps
