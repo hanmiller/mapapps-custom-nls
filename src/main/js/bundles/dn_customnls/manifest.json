@@ -1,0 +1,11 @@
+{
+    "Bundle-SymbolicName": "dn_customnls",
+    "Bundle-Name": "Custom NLS",
+    "Bundle-Description": "This bundle provides custom nls files",
+    "Bundle-Version": "3.3.0",
+    "Bundle-StartLevel": 1,
+    "Product-Name": "map.apps Developer Network",
+    "Bundle-Localization": [],
+    "Bundle-Main": "",
+    "i18n-extension": ["bundle"]
+}

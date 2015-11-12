@@ -1,0 +1,81 @@
+{
+    "load": {
+        "bundleLocations" : ["localbundles","bundles"],
+        "allowedBundles" : [
+            "system",
+            "splashscreen",
+            "map",
+            "themes",
+            "templates",
+            "templatelayout",
+            "windowmanager",
+            "toolset",
+            "toolrules",
+            "mapflow",
+            "dn_customnls"
+        ]
+    },
+    "bundles" : {
+        "map" : {
+            "MapState" : {
+                "initialExtent":{
+                    "xmin" : -1100000,
+                    "ymin" : 4000000,
+                    "xmax" : 3500000,
+                    "ymax" : 8800000,
+                    "spatialReference": {
+                        "wkid": 3857
+                    }
+                }
+            },
+            "MapModelFactory" : {
+                "_configData" : {
+                    "maps" :[
+                        {
+                            "id": "default",
+                            "glass_pane" : [],
+                            "operationalLayer" : [
+                                {
+                                    "title": "Streets",
+                                    "service": "streets",
+                                    "enabled" : true
+                                },
+                                {
+                                    "title": "Topographic",
+                                    "service": "worldTopo",
+                                    "enabled" : false
+                                },
+                                {
+                                    "title": "Imagery",
+                                    "service": "imagery",
+                                    "enabled" : false
+                                }],
+                            "baseLayer" : []
+                        }
+                    ]
+                }
+            },
+            "MappingResourceRegistryFactory" : {
+                "_knownServices" :{
+                    "services": [
+                        {
+                            "id":"worldTopo",
+                            "type":"AGS_TILED",
+                            "url":"http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer"
+                        },
+                        {
+                            "id":"streets",
+                            "type":"AGS_TILED",
+                            "url":"http://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"
+                        },
+                        {
+                            "id":"imagery",
+                            "type":"AGS_TILED",
+                            "url":"http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
