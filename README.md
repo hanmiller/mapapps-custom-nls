@@ -32,7 +32,8 @@ define({
 });
 ```
 
-A full list of all available nls string can be found here: (...following soon...)
+A full list of all available nls string can be found here:
+http://developernetwork.conterra.de/en/documentation/mapapps/33/nls-strings
 
 After saving your changes, zip all contents of the bundle folder and upload the zip file via the map.apps Manager bundle management tab.
 
