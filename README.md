@@ -32,7 +32,7 @@ define({
 });
 ```
 
-A full list of all available nls string can be found here: <TBD>
+A full list of all available nls string can be found here: (...following soon...)
 
 After saving your changes, zip all contents of the bundle folder and upload the zip file via the map.apps Manager bundle management tab.
 
