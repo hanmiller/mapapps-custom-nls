@@ -4,7 +4,7 @@
     "Bundle-Description": "This bundle provides custom nls files",
     "Bundle-Version": "1.0.0",
     "Bundle-StartLevel": 1,
-    "Product-Name": "con terra Developer Network",
+    "Product-Name": "devnet-mapapps-custom-nls",
     "Bundle-Localization": [],
     "Bundle-Main": "",
     "i18n-extension": ["bundle"]
