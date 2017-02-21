@@ -484,9 +484,9 @@
         </plugins>
     </build>
     <scm>
-        <connection>scm:git:https://github.com/conterra/mapapps-content-openweathermap.git</connection>
-        <developerConnection>scm:git:https://github.com/conterra/mapapps-content-openweathermap.git</developerConnection>
-        <url>https://github.com/conterra/mapapps-content-openweathermap</url>
+        <connection>scm:git:https://github.com/conterra/mapapps-custom-nls.git</connection>
+        <developerConnection>scm:git:https://github.com/conterra/mapapps-custom-nls.git</developerConnection>
+        <url>https://github.com/conterra/mapapps-custom-nls</url>
         <tag>HEAD</tag>
     </scm>
     <distributionManagement>
