@@ -1,84 +1,128 @@
 {
-    "properties": {
-        "amdPackages": "apprt@^3.3.0"
+  "properties": {
+    "amdPackages": "apprt@^3.3.0"
+  },
+  "load": {
+    "bundleLocations": [
+      "localbundles",
+      "bundles"
+    ],
+    "allowedBundles": [
+      "system@^3.3.0",
+      "splashscreen@^3.3.0",
+      "map@^3.3.0",
+      "themes@^3.3.0",
+      "templates@^3.3.0",
+      "templatelayout@^3.3.0",
+      "windowmanager@^3.3.0",
+      "toolset@^3.3.0",
+      "toolrules@^3.3.0",
+      "mapflow@^3.3.0",
+      "banner@^3.3.0",
+      "custominfo@^3.3.0",
+      "dn_customnls"
+    ]
+  },
+  "bundles": {
+    "banner": {
+      "BannerWidget": {
+        "label": "Developer Network",
+        "image": "https://www.conterra.de/~/media/conterra/images/site_logos/conterra-logo.ashx",
+        "imagePosition": "above",
+        "link": "http://developernetwork.conterra.de"
+      }
     },
-    "load": {
-        "bundleLocations" : ["localbundles","bundles"],
-        "allowedBundles" : [
-            "system@^3.3.0",
-            "splashscreen@^3.3.0",
-            "map@^3.3.0",
-            "themes@^3.3.0",
-            "templates@^3.3.0",
-            "templatelayout@^3.3.0",
-            "windowmanager@^3.3.0",
-            "toolset@^3.3.0",
-            "toolrules@^3.3.0",
-            "mapflow@^3.3.0",
-            "dn_customnls"
-        ]
-    },
-    "bundles" : {
-        "map" : {
-            "MapState" : {
-                "initialExtent":{
-                    "xmin" : -1100000,
-                    "ymin" : 4000000,
-                    "xmax" : 3500000,
-                    "ymax" : 8800000,
-                    "spatialReference": {
-                        "wkid": 3857
-                    }
-                }
-            },
-            "MapModelFactory" : {
-                "_configData" : {
-                    "maps" :[
-                        {
-                            "id": "default",
-                            "glass_pane" : [],
-                            "operationalLayer" : [
-                                {
-                                    "title": "Streets",
-                                    "service": "streets",
-                                    "enabled" : true
-                                },
-                                {
-                                    "title": "Topographic",
-                                    "service": "worldTopo",
-                                    "enabled" : false
-                                },
-                                {
-                                    "title": "Imagery",
-                                    "service": "imagery",
-                                    "enabled" : false
-                                }],
-                            "baseLayer" : []
-                        }
-                    ]
-                }
-            },
-            "MappingResourceRegistryFactory" : {
-                "_knownServices" :{
-                    "services": [
-                        {
-                            "id":"worldTopo",
-                            "type":"AGS_TILED",
-                            "url":"http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer"
-                        },
-                        {
-                            "id":"streets",
-                            "type":"AGS_TILED",
-                            "url":"http://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"
-                        },
-                        {
-                            "id":"imagery",
-                            "type":"AGS_TILED",
-                            "url":"http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
-                        }
-                    ]
-                }
+    "custominfo": {
+      "CustomInfoToggleTool": [
+        {
+          "id": "customInfoTool",
+          "activateOnStartup": true,
+          "title": "Information",
+          "tooltip": "Information",
+          "iconClass": "icon-custom-info-info",
+          "toolClass": "ctInfo",
+          "togglable": true,
+          "widgetSettings": {
+            "content": "This app shows the functionality of the Custom nls bundle which allows you to customize the default nls strings that are used in map.apps (e.g. for tool titles or other ui elements).<br> Here, the title of the Map Flow tool in the lower left corner is changed from <b> Map Content/Karteninhalt </b> to <b> Topics/Themen </b.",
+            "window": {
+              "title": "Information",
+              "marginBox": {
+                "w": 300,
+                "h": 150,
+                "l": 25,
+                "b": 70
+              },
+              "draggable": true,
+              "closable": true,
+              "modal": false,
+              "maximizable": false,
+              "resizable": false
             }
+          }
         }
+      ]
+    },
+    "map": {
+      "MapState": {
+        "initialExtent": {
+          "xmin": -1100000,
+          "ymin": 4000000,
+          "xmax": 3500000,
+          "ymax": 8800000,
+          "spatialReference": {
+            "wkid": 3857
+          }
+        }
+      },
+      "MapModelFactory": {
+        "_configData": {
+          "maps": [
+            {
+              "id": "default",
+              "glass_pane": [],
+              "operationalLayer": [
+                {
+                  "title": "Streets",
+                  "service": "streets",
+                  "enabled": true
+                },
+                {
+                  "title": "Topographic",
+                  "service": "worldTopo",
+                  "enabled": false
+                },
+                {
+                  "title": "Imagery",
+                  "service": "imagery",
+                  "enabled": false
+                }
+              ],
+              "baseLayer": []
+            }
+          ]
+        }
+      },
+      "MappingResourceRegistryFactory": {
+        "_knownServices": {
+          "services": [
+            {
+              "id": "worldTopo",
+              "type": "AGS_TILED",
+              "url": "http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer"
+            },
+            {
+              "id": "streets",
+              "type": "AGS_TILED",
+              "url": "http://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"
+            },
+            {
+              "id": "imagery",
+              "type": "AGS_TILED",
+              "url": "http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
+            }
+          ]
+        }
+      }
     }
+  }
 }
