@@ -5,7 +5,7 @@ If you want to change the title of a ui element in map.apps, you can simply do t
 
 Sample App
 ------------------
-http://www.mapapps.de/mapapps/resources/apps/downloads_customnls/index.html
+https://demos.conterra.de/mapapps/resources/apps/downloads_customnls/index.html
 
 In this sample app, the title of the Map Flow tool in the lower left corner is changed from "Map Content"/"Karteninhalt" to "Topics"/"Themen".
 
