@@ -19,31 +19,31 @@ This project demonstrates how to build a custom language bundle.
 
 Prepare `application.properties` for the additionl language
 ```properties
-client.config.supportedLocales=en,de,__<your language code>__
+client.config.supportedLocales=en,de,<your language code>
 ```
 
 To set the map.apps default language change the following property accordingly:
 ```properties
-client.config.defaultLocale=__<your language code>__
+client.config.defaultLocale=<your language code>
 ```
 
 In order to apply the new bundle add the following property:
 ```properties
-appservice.default.bundles=system,templatelayout,__language-pack__
+appservice.default.bundles=system,templatelayout,language-pack
 ```
 Thus the bundle will be loaded with every app automatically.
 
 ### Preparation of language-pack project
 
 * Rename folder `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\en` with your country code, e.g. `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\fr`
-* Edit file `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\bundle.js` and replace `en` with your country code (here: `__fr__`)
+* Edit file `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\bundle.js` and replace `en` with your country code (here: `**fr**`)
 ``` 
 module.exports = {
     root: {},
-    "__fr__": true
+    "**fr**": true
 };
 ```
-* Add your translations to file `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\__fr__\bundle.js`
+* Add your translations to file `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\fr\bundle.js`
 
 ## Usage
 
@@ -143,7 +143,7 @@ mvn clean install -P compress,upload
 1. Open file `manifest.json` from bundle `language-pack` and adjust the `apprt` depenendency to ensure working only with the current map.apps version:
 ```json
 "dependencies": {
-   "apprt": "__4.7.2__"
+   "apprt": "4.7.2"
 }
 ```
 
