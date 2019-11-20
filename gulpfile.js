@@ -13,4 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import ".";
+const gulp = require("gulp");
+const mapapps = require('ct-mapapps-gulp-js');
+
+mapapps.registerTasks();
+
+gulp.task("default",
+    gulp.series(
+        "copy-resources",
+        gulp.parallel("js-transpile")
+    ));
