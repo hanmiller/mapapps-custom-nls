@@ -1,6 +1,6 @@
 {
     "name": "language-pack",
-    "version": "1.0.0-SNAPSHOT",
+    "version": "4.7.2",
     "title": "Language pack",
     "description": "English language pack for map.apps.",
     "vendor": "con terra GmbH",
@@ -9,6 +9,6 @@
     "i18n": [],
     "i18n-extension": ["bundle"],
     "dependencies": {
-        "apprt": "1.0.0-SNAPSHOT"
+        "apprt": "4.7.2"
     }
 }
