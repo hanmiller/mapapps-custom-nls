@@ -2,31 +2,48 @@
 
 This project demonstrates how to build a custom language bundle.
 
-* [Requirements](https://github.com/conterra/mapapps-4-developers#requirements)
-* [Usage](https://github.com/conterra/mapapps-4-developers#usage)
-* [Updating from older versions](https://github.com/conterra/mapapps-4-developers#updating-from-older-versions)
-* [References](https://github.com/conterra/mapapps-4-developers#references)
+* [Requirements](https://github.com/conterra/mapapps-custom-nls#requirements)
+* [Preparation](https://github.com/conterra/mapapps-custom-nls#preparation)
+* [Usage](https://github.com/conterra/mapapps-custom-nls#usage)
+* [Updating from older versions](https://github.com/conterra/mapapps-custom-nls#updating-from-older-versions)
+* [Changelog](https://github.com/conterra/mapapps-custom-nls#changelog)
 
 ## Requirements
 
 * map.apps 4.7.2
 * all resources from `map.apps-VERSION/sdk/m2-repository` need to be copied manually to your local Maven repository (e.g. `%UserProfile%/.m2/repository` for Windows, `~/.m2/repository` for MacOS).
 
+## Preparation
+
+### Preparation of map.apps
+
 Prepare `application.properties` for the additionl language
 ```properties
-client.config.supportedLocales=en,de,<your language code>
+client.config.supportedLocales=en,de,__<your language code>__
 ```
 
-## Preparation
+To set the map.apps default language change the following property accordingly:
+```properties
+client.config.defaultLocale=__<your language code>__
+```
+
+In order to apply the new bundle add the following property:
+```properties
+appservice.default.bundles=system,templatelayout,__language-pack__
+```
+Thus the bundle will be loaded with every app automatically.
+
+### Preparation of language-pack project
+
 * Rename folder `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\en` with your country code, e.g. `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\fr`
-* Edit file `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\bundle.js` and replace `en` with your country code
+* Edit file `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\bundle.js` and replace `en` with your country code (here: `__fr__`)
 ``` 
 module.exports = {
     root: {},
-    "fr": true
+    "__fr__": true
 };
 ```
-* Add your translations to file `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\fr\bundle.js`
+* Add your translations to file `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\__fr__\bundle.js`
 
 ## Usage
 
@@ -108,8 +125,33 @@ mvn clean install -P compress
 
 ### Upload your code to a map.apps installation
 
+Make sure you use the correct admin username and password in the pom.xml file for the `mapapps-maven-plugin` and `ct-jsregistry-maven-plugin` configuration.
+
+```xml
+<username>admin</username>
+<password>admin</password>
+```
+
 To upload your apps and bundles after compression append the `upload` profile.
 
 ```sh
 mvn clean install -P compress,upload
 ```
+
+## Updating from older versions
+
+1. Open file `manifest.json` from bundle `language-pack` and adjust the `apprt` depenendency to ensure working only with the current map.apps version:
+```json
+"dependencies": {
+   "apprt": "__4.7.2__"
+}
+```
+
+2. Compare the changes of file `language-pack\nls\en\bundle.js` of the branch version you are working with, with the current content of the file. So you will see the changes that can be applied to your custom `bundle.js`.
+
+
+## Changelog
+
+## [4.7.2] - 2019-11-20
+### Changed
+- Support for map.apps 4.7.2.
