@@ -36,11 +36,11 @@ Thus the bundle will be loaded with every app automatically.
 ### Preparation of language-pack project
 
 * Rename folder `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\en` with your country code, e.g. `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\fr`
-* Edit file `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\bundle.js` and replace `en` with your country code (here: `**fr**`)
+* Edit file `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\bundle.js` and replace `en` with your country code (here: `fr`)
 ``` 
 module.exports = {
     root: {},
-    "**fr**": true
+    "fr": true
 };
 ```
 * Add your translations to file `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\fr\bundle.js`
