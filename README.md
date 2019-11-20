@@ -1,60 +1,115 @@
-# Custom nls
-This bundle allows to customize the default nls strings that are used in map.apps (e.g. for tool titles or other ui elements).
+# mapapps-custom-nls
 
-If you want to change the title of a ui element in map.apps, you can simply do this by adding nls files to your app. But if you want to apply text changes to multiple apps, using a custom nls bundle is a better solution. Adding or changing strings in the future can be done in that bundle and once you have uploaded the new version of this bundle, all apps use the new text strings immediately.
+This project demonstrates how to build a custom language bundle.
 
-Sample App
-------------------
-https://demos.conterra.de/mapapps/resources/apps/downloads_customnls/index.html
+* [Requirements](https://github.com/conterra/mapapps-4-developers#requirements)
+* [Usage](https://github.com/conterra/mapapps-4-developers#usage)
+* [Updating from older versions](https://github.com/conterra/mapapps-4-developers#updating-from-older-versions)
+* [References](https://github.com/conterra/mapapps-4-developers#references)
 
-In this sample app, the title of the Map Flow tool in the lower left corner is changed from "Map Content"/"Karteninhalt" to "Topics"/"Themen".
+## Requirements
 
-Installation Guide
-------------------
-To add your own nls customizations, at first download the bundle and extract the zip file. In the zip file you will find two bundle.js files in the folder "nls" (for English) and in "nls/de" (for German).
+* map.apps 4.7.2
+* all resources from `map.apps-VERSION/sdk/m2-repository` need to be copied manually to your local Maven repository (e.g. `%UserProfile%/.m2/repository` for Windows, `~/.m2/repository` for MacOS).
 
-Open this files in a text editor and add the nls strings that you want to customize. Sample:
-```
-define({
-    root:
-    ({
-        "basemaptoggler": {
-            "ui": {
-                "labelTitle": "Background"
-            }
-        },
-        "mapflow": {
-            "tool": {
-                "title": "Topics"
-            }
-        }
-    }),
-    "de": true
-});
+Prepare `application.properties` for the additionl language
+```properties
+client.config.supportedLocales=en,de,<your language code>
 ```
 
-A full list of all available nls string can be found here:
-http://developernetwork.conterra.de/en/documentation/mapapps/33/nls-strings
+## Preparation
+* Rename folder `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\en` with your country code, e.g. `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\fr`
+* Edit file `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\bundle.js` and replace `en` with your country code
+``` 
+module.exports = {
+    root: {},
+    "fr": true
+};
+```
+* Add your translations to file `mapapps-custom-nls\src\main\js\bundles\language-pack\nls\fr\bundle.js`
 
-After saving your changes, zip all contents of the bundle folder and upload the zip file via the map.apps Manager bundle management tab.
+## Usage
 
-Now add the bundle to all of your apps, that should use the customized nls strings.
+The project supports a 'remote project' and 'standalone project' mode.
 
-Adding a completely new language to map.apps
-------------------
-If you want to add a completely new language to your map.apps installation, please have a look at this tool: http://developernetwork.conterra.de/en/downloads/tools/how-generate-additional-language-bundles-mapapps
+### Use 'remote project' mode
 
-Development Guide
-------------------
-### Define the mapapps remote base
-Before you can run the project you have to define the mapapps.remote.base property in the pom.xml-file:
-`<mapapps.remote.base>http://%YOURSERVER%/ct-mapapps-webapp-%VERSION%</mapapps.remote.base>`
+In this mode a map.apps installation is available elsewhere and most JavaScript resources are fetched from this installation.
+This mode is recommended.
 
-##### Other methods to to define the mapapps.remote.base property.
-1. Goal parameters
-`mvn install -Dmapapps.remote.base=http://%YOURSERVER%/ct-mapapps-webapp-%VERSION%`
+The URL of the map.apps server can be declared in the pom.xml. 
 
-2. Build properties
-Change the mapapps.remote.base in the build.properties file and run:
-`mvn install -Denv=dev -Dlocal.configfile=%ABSOLUTEPATHTOPROJECTROOT%/build.properties`
+Replace
 
+```xml
+ <mapapps.remote.base>.</mapapps.remote.base>
+```
+
+with
+
+```xml
+ <mapapps.remote.base>http://yourserver/mapapps</mapapps.remote.base>
+```
+
+As an alternative the URL can be declared in a file called `build.properties` with the content
+
+```properties
+mapapps.remote.base=http://yourserver/mapapps
+```
+
+and enabling the "env-dev" Maven profile.
+Append `-P env-dev` or `-Denv=dev` to any Maven execution or declare the profile as activated by default in your Maven settings.xml.
+
+### Use 'standalone project' mode
+
+In this mode all JavaScript sources are added to this project during development.
+The drawback of this mode is that you can not test authentication and that the default settings are not read from the remote instance.
+
+This mode requires that the profile `include-mapapps-deps` is activated.
+Append `-P include-mapapps-deps` to any Maven execution or declare the profile as activated by default in your Maven settings.xml.
+
+### Start a local HTTP server
+
+Start the integrated Jetty server with:
+
+```sh
+mvn clean jetty:run -P watch-all
+```
+
+Make sure that the `watch-all` Maven profile is activated.
+The profile will start a gulp task that watches for changes in your source code.
+
+After a successfull start the Jetty server ist available at [http://localhost:9090](http://localhost:9090).
+
+### Skip intallation of Node.js and npm during Maven execution
+
+By appending `-Denv=dev -Dlocal.configfile=./build.properties` to any Maven execution the development mode is activated.
+This means:
+
+* Node.js and npm are not installed
+* watch-all profile is activated
+* the build.properties file is loaded
+
+To enforce the installation of Node.js and npm execute:
+
+```
+mvn initialize
+```
+
+This triggers the installation of Node.js and npm exclusively.
+
+### Make your code bundle ready
+
+To ensure that all files are compressed/minified and a dependencies.json is calculated execute:
+
+```sh
+mvn clean install -P compress
+```
+
+### Upload your code to a map.apps installation
+
+To upload your apps and bundles after compression append the `upload` profile.
+
+```sh
+mvn clean install -P compress,upload
+```

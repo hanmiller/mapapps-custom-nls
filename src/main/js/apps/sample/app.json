@@ -1,0 +1,63 @@
+{
+    "load": {
+        "bundleLocations": [
+            "localbundles",
+            "bundles"
+        ],
+        "allowedBundles": [
+            "system",
+            "splashscreen",
+            "templatelayout",
+            "template-seasons",
+            "theme-everlasting",
+            "map-init",
+            "toc",
+            "languagetoggler",
+            "language-pack",
+            "console"
+        ]
+    },
+    "bundles": {
+        "map-init": {
+            "Config": {
+                "basemaps": [{
+                    "id": "streets",
+                    "basemap": "streets",
+                    "title": "Strassen",
+                    "selected": true
+                }],
+                "map": {
+                    "layers": [
+                        {
+                            "title": "Gemeinden",
+                            "type": "AGS_FEATURE",
+                            "url": "https://services.conterra.de/arcgis/rest/services/common/grenzen/FeatureServer/0",
+                            "definitionExpression": "kgs8 LIKE '05515%'"
+                        },
+                        {
+                            "title": "Kreise",
+                            "type": "AGS_FEATURE",
+                            "url": "https://services.conterra.de/arcgis/rest/services/common/grenzen/FeatureServer/1",
+                            "definitionExpression": "land_nr = 5"
+                        },
+                        {
+                            "title": "Bundeslaender",
+                            "type": "AGS_FEATURE",
+                            "url": "https://services.conterra.de/arcgis/rest/services/common/grenzen/FeatureServer/2"
+                        }
+                    ]
+                },
+                "view": {
+                    "viewmode": "2D",
+                    "extent": {
+                        "xmin": 600000,
+                        "ymin": 5800000,
+                        "xmax": 1700000,
+                        "ymax": 7600000,
+                        "spatialReference": 3857
+                    }
+                }
+            }
+        }
+    }
+}
